@@ -54,7 +54,7 @@ public class NauEspaial extends javax.swing.JFrame {
 
 
 class PanelNau extends JPanel implements Runnable, KeyListener{
-    private int numNaus=3;    
+    private int numNaus=10;    
     Nau[] nau;
     Nau nauPropia;
     
@@ -83,7 +83,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     public void run() {
         System.out.println("Inici fil repintar");
         while(true) {
-            try { Thread.sleep(100);} catch(Exception e) {} // espero 0,1 segons
+            try { Thread.sleep(1);} catch(Exception e) {} // espero 0,1 segons
             System.out.println("Repintant");
             repaint();            
             }                   
@@ -129,9 +129,9 @@ class Nau extends Thread {
     private int dsx,dsy,v;
     private int tx = 10;
     private int ty = 10;
-
-    private String img = "xwing.png";
+    
     private Image image;
+    private Image image2;
 
     public Nau(String nomNau, int x, int y, int dsx, int dsy, int v ) {
         this.nomNau = nomNau;
@@ -142,6 +142,7 @@ class Nau extends Thread {
         this.v=v;
         
             image = new ImageIcon(Nau.class.getResource("xwing.png")).getImage();
+            //image = new ImageIcon(Nau.class.getResource(/*imatge nau enemiga*/)).getImage();
         
         Thread t = new Thread(this);
         t.start();
