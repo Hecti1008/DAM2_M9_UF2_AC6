@@ -175,11 +175,16 @@ class Nau extends Thread {
         }
     //Moure nau esquerra y dreta
     public void esquerra(){
-        this.dsx = -10;
+        if(!(x<=0 - tx)) {
+            this.dsx = -10;
+        }
+        
     }
     
     public void dreta(){
+        if(!(x>=700 - tx)) {
         this.dsx = 10;
+        }
     }
     
     public void parar(){
