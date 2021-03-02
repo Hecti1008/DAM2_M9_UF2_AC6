@@ -47,14 +47,14 @@ public class NauEspaial extends javax.swing.JFrame {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setTitle("Naus Espaials");
         f.setContentPane(new PanelNau());
-        f.setSize(880, 860);
+        f.setSize(500, 550);
         f.setVisible(true);
         }
     }
 
 
 class PanelNau extends JPanel implements Runnable, KeyListener{
-    private int numNaus=10;    
+    private int numNaus=3;    
     Nau[] nau;
     Nau nauPropia;
     
@@ -71,7 +71,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
             nau[i]= new Nau(nomNau,posX,posY,dX,dY,velocitat);
             }
         
-        nauPropia = new Nau("NauNostre", 350, 650, 0, 0, 100);
+        nauPropia = new Nau("NauNostre", 200, 440, 0, 0, 100);
         
         Thread n = new Thread(this);
         n.start();   
@@ -91,8 +91,10 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
 
     public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(int i=0; i<nau.length;++i) nau[i].pinta(g);
-        nauPropia.pinta(g);
+        for(int i=0; i<nau.length;++i) {
+            nau[i].pinta(g);
+        }
+            nauPropia.pinta2(g);
         }
 
     @Override
@@ -141,8 +143,13 @@ class Nau extends Thread {
         this.dsy=dsy;
         this.v=v;
         
-            image = new ImageIcon(Nau.class.getResource("xwing.png")).getImage();
-            //image = new ImageIcon(Nau.class.getResource(/*imatge nau enemiga*/)).getImage();
+        
+            image = new ImageIcon(Nau.class.getResource("tie.png")).getImage();
+
+        
+            image2 = new ImageIcon(Nau.class.getResource("xwing.png")).getImage();
+ 
+        
         
         Thread t = new Thread(this);
         t.start();
@@ -156,13 +163,17 @@ class Nau extends Thread {
         x=x + dsx;
         y=y + dsy;
         // si arriva als marges ...
-        if ( x>= 700 - tx || x<= tx) dsx = - dsx;
-        if ( y >= 700 - ty || y<=ty ) dsy = - dsy;
+        if ( x>= 440 - tx || x<= tx) dsx = - dsx;
+        if ( y >= 400 - ty || y<=ty ) dsy = - dsy;
         }
     
     public synchronized void pinta (Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.drawImage(this.image, x, y, null);
+        }
+    public synchronized void pinta2 (Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.drawImage(this.image2, x, y, null);
         }
     
 
@@ -175,14 +186,14 @@ class Nau extends Thread {
         }
     //Moure nau esquerra y dreta
     public void esquerra(){
-        if(!(x<=0 - tx)) {
+        if(!(x<=15 - tx)) {
             this.dsx = -10;
         }
         
     }
     
     public void dreta(){
-        if(!(x>=700 - tx)) {
+        if(!(x>=450 - tx)) {
         this.dsx = 10;
         }
     }
