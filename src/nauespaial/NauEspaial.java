@@ -206,7 +206,13 @@ class Nau extends Thread {
         
         public void setSeguir(boolean s){
         this.seguir = s;
-    }
+        }
+        public int getY(){
+            return this.y;
+        }
+        public int getX(){
+            return this.x;
+        }
     
     }
     
