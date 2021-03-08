@@ -96,6 +96,10 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
         }
             nauPropia.pinta2(g);
         }
+    
+    public synchronized void novabala(){
+        
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -189,6 +193,9 @@ class Nau extends Thread {
             this.v=v;
             
             image = new ImageIcon(Nau.class.getResource(/*imatge de la bala*/)).getImage();
+            
+            Thread t = new Thread(Dispars, this);
+            t.start();
             
         }
     
