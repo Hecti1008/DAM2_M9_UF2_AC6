@@ -162,7 +162,6 @@ class Nau extends Thread {
     public synchronized void moure (){
         x=x + dsx;
         y=y + dsy;
-        // si arriva als marges ...
         if ( x>= 440 - tx || x<= tx) dsx = - dsx;
         if ( y >= 400 - ty || y<=ty ) dsy = - dsy;
         }
@@ -175,6 +174,25 @@ class Nau extends Thread {
         Graphics2D g2d = (Graphics2D)g;
         g2d.drawImage(this.image2, x, y, null);
         }
+    
+    class Disparar extends Thread {
+    ThreadGroup Dispars = new ThreadGroup("");
+    private int x,y;
+    private int v;
+    private int i = 0;
+    private Image image;
+    private boolean seguir = true;
+    
+        public Disparar(int x, int y, int v){
+            this.x=x;
+            this.y=y;
+            this.v=v;
+            
+            image = new ImageIcon(Nau.class.getResource(/*imatge de la bala*/)).getImage();
+            
+        }
+    
+    }
     
 
     public void run() {
