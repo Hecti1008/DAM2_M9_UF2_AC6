@@ -162,6 +162,8 @@ class Nau extends Thread {
         t.start();
         }
     
+    
+    
     public int velocitat (){
         return v;
         }
@@ -201,6 +203,10 @@ class Nau extends Thread {
             t.start();
             
         }
+        
+        public void setSeguir(boolean s){
+        this.seguir = s;
+    }
     
     }
     
