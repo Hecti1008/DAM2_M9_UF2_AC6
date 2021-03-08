@@ -115,6 +115,9 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
         if (e.getKeyCode() == 39) {
             nauPropia.dreta();
         }//System.out.println("a la dreta");
+        if (e.getKeyCode()==38){
+            novabala();
+        }
     }
 
     @Override
