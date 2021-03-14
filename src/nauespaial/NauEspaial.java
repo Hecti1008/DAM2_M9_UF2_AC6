@@ -156,59 +156,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     
 }
 
-class Nau extends Thread {
-    private String nomNau;
-    private int x,y;
-    private int dsx,dsy,v;
-    private int tx = 10;
-    private int ty = 10;
-    
-    private Image image;
-    private Image image2;
-
-    public Nau(String nomNau, int x, int y, int dsx, int dsy, int v ) {
-        this.nomNau = nomNau;
-        this.x=x;
-        this.y=y;
-        this.dsx=dsx;
-        this.dsy=dsy;
-        this.v=v;
-        
-        
-            image = new ImageIcon(Nau.class.getResource("tie.png")).getImage();
-
-        
-            image2 = new ImageIcon(Nau.class.getResource("xwing.png")).getImage();
- 
-        
-        
-        Thread t = new Thread(this);
-        t.start();
-        }
-    
-    
-    
-    public int velocitat (){
-        return v;
-        }
-    
-    public synchronized void moure (){
-        x=x + dsx;
-        y=y + dsy;
-        if ( x>= 440 - tx || x<= tx) dsx = - dsx;
-        if ( y >= 400 - ty || y<=ty ) dsy = - dsy;
-        }
-    
-    public synchronized void pinta (Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(this.image, x, y, null);
-        }
-    public synchronized void pinta2 (Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(this.image2, x, y, null);
-        }
-    
-    public class Disparar extends Thread {
+public class Disparar extends Thread {
     ThreadGroup dispars = new ThreadGroup("");
     private int x,y;
     private int v;
@@ -261,6 +209,73 @@ class Nau extends Thread {
         }
     
     }
+
+class Nau extends Thread {
+    private String nomNau;
+    private int x,y;
+    private int dsx,dsy,v;
+    private int tx = 10;
+    private int ty = 10;
+    private boolean seguir = true;
+    
+    private Image image;
+    private Image image2;
+
+    public Nau(String nomNau, int x, int y, int dsx, int dsy, int v ) {
+        this.nomNau = nomNau;
+        this.x=x;
+        this.y=y;
+        this.dsx=dsx;
+        this.dsy=dsy;
+        this.v=v;
+        
+        
+            image = new ImageIcon(Nau.class.getResource("tie.png")).getImage();
+
+        
+            image2 = new ImageIcon(Nau.class.getResource("xwing.png")).getImage();
+ 
+        
+        
+        Thread t = new Thread(this);
+        t.start();
+        }
+    
+    
+    
+    public int velocitat (){
+        return v;
+        }
+    
+    public void setSeguir(boolean s){
+        this.seguir = s;
+    }
+    
+    public int getX(){
+        return this.x;
+    }
+    
+    public int getY(){
+        return this.y;
+    }
+    
+    public synchronized void moure (){
+        x=x + dsx;
+        y=y + dsy;
+        if ( x>= 440 - tx || x<= tx) dsx = - dsx;
+        if ( y >= 400 - ty || y<=ty ) dsy = - dsy;
+        }
+    
+    public synchronized void pinta (Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.drawImage(this.image, x, y, null);
+        }
+    public synchronized void pinta2 (Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.drawImage(this.image2, x, y, null);
+        }
+    
+    
     
 
     public void run() {
