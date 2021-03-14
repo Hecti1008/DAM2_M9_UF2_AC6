@@ -126,7 +126,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
         nauPropia.pinta2(g);
         
         try{
-            matarNave();
+            matarNau();
         }catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -173,7 +173,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
         }
     }
     
-    public void matarNave() throws InterruptedException{
+    public void matarNau() throws InterruptedException{
         int xNau;
         int yNau;
         int xDisparar;
