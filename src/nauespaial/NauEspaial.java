@@ -11,7 +11,9 @@ import java.awt.event.KeyListener;
 import java.util.*;
 import javax.swing.*;
 
-public class NauEspaial extends javax.swing.JFrame {    
+public class NauEspaial extends javax.swing.JFrame {   
+    
+    ThreadGroup dispars = new ThreadGroup("");
     
     public NauEspaial() {
         initComponents();
@@ -197,7 +199,7 @@ class Nau extends Thread {
             this.y=y;
             this.v=v;
             
-            image = new ImageIcon(Nau.class.getResource(/*imatge de la bala*/)).getImage();
+            image = new ImageIcon(Nau.class.getResource("dispars.png")).getImage();
             
             Thread t = new Thread(Dispars, this);
             t.start();
