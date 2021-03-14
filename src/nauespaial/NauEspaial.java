@@ -106,6 +106,16 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     public static void setContador(int c) {
         contador = c;
     }
+    
+    public synchronized void novabala(){
+        if (contador < 5) {
+            if (dispars[contador] == null) {
+                dispars[contador] = new Disparar(nauPropia.getX() + 45, nauPropia.getY() - -20, nauPropia.velocitat());
+            }
+        }
+        
+        contador++;
+    }
 
     public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -133,17 +143,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
                 }
             }
         }
-    
-    public synchronized void novabala(){
-        if (contador < 5) {
-            if (dispars[contador] == null) {
-                dispars[contador] = new Disparar(nauPropia.getX() + 45, nauPropia.getY() - -20, nauPropia.velocitat());
-            }
-        }
-        
-        contador++;
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
         
@@ -202,7 +202,6 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
                                 contadorfinal++;
                             }
                             if(contadorfinal == nau.length){
-                                System.out.println("Has acabat amb l\'imperi");
                                 Thread.sleep(2000);
                                 System.exit(0);
                             }
@@ -229,7 +228,7 @@ class Disparar extends Thread {
             this.y=y;
             this.v=v;
             
-            image = new ImageIcon(Nau.class.getResource("dispars.png")).getImage();
+            image = new ImageIcon(Nau.class.getResource("dispars.jpg")).getImage();
             
             Thread t = new Thread(dispars, this);
             t.start();  
