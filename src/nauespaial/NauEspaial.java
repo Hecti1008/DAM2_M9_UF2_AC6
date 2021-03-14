@@ -109,10 +109,29 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
 
     public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(int i=0; i<nau.length;++i) {
-            nau[i].pinta(g);
+        for(int i=0; i<nau.length;++i) 
+            if (nau[i] != null) {
+                nau[i].pinta(g);
+            }
+        nauPropia.pinta2(g);
+        
+        try{
+            matarNave();
+        }catch (InterruptedException e){
+            e.printStackTrace();
         }
-            nauPropia.pinta2(g);
+        
+        //for de la bala que la pinta i desapareix si surt
+        for(int i=0; i<dispars.length; i++) {
+            if (dispars[i] != null) {
+                Y = dispars[i].getY();
+                if (Y <= 0) {
+                    dispars[i].setSeguir(false);
+                    dispars[i]=null;
+                }else{
+                    dispars[i].pintaDispar(g);
+                }
+            }
         }
     
     public synchronized void novabala(){
@@ -151,6 +170,47 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
         }
         if (e.getKeyCode() == 39) {
             nauPropia.parar();
+        }
+    }
+    
+    public void matarNave() throws InterruptedException{
+        int xNau;
+        int yNau;
+        int xDisparar;
+        int yDisparar;
+        double aprop;
+        int contadorfinal=0;
+        
+        for(int i=0; i<nau.length; i++) {
+            for (int j=0; j<dispars.length; j++) {
+                if(dispars[j] != null && nau[i] != null) {
+                    xNau = nau[i].getX();
+                    xDisparar = dispars[j].getX();
+                    yNau = nau[i].getY();
+                    yDisparar = dispars[j].getY();
+                    
+                    aprop = Math.sqrt(Math.pow((yNau - yDisparar), 2) + Math.pow((xNau - xDisparar), 2));
+                    
+                    if(aprop < 35) {
+                        dispars[j].setSeguir(true);
+                        nau[i].setSeguir(false);
+                        nau[i] = null;
+                        dispars[j] = null;
+                        
+                        for(int f=0; f<nau.length; f++){
+                            if(nau[f] == null){
+                                contadorfinal++;
+                            }
+                            if(contadorfinal == nau.length){
+                                System.out.println("Has acabat amb l\'imperi");
+                                Thread.sleep(2000);
+                                System.exit(0);
+                            }
+                        }
+                        
+                    }
+                }
+            }
         }
     }
     
