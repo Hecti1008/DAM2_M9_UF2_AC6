@@ -59,6 +59,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     private int numNaus=3;    
     Nau[] nau;
     Nau nauPropia;
+    private static int contador = 0;
     
     public PanelNau(){        
         nau = new Nau[numNaus];
@@ -90,6 +91,14 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
             repaint();            
             }                   
         }
+    
+    public static void restaContador(){
+        contador--;
+    }
+    
+    public static int getContador(){
+        return contador;
+    }
 
     public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
