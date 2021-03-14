@@ -102,6 +102,10 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     public static int getContador(){
         return contador;
     }
+    
+    public static void setContador(int c) {
+        contador = c;
+    }
 
     public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
