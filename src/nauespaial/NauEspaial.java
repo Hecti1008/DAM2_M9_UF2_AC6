@@ -60,6 +60,9 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     Nau[] nau;
     Nau nauPropia;
     private static int contador = 0;
+    int Y;
+    Disparar[] dispars = new Disparar[5];
+    Disparar disparar;
     
     public PanelNau(){        
         nau = new Nau[numNaus];
@@ -109,7 +112,13 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
         }
     
     public synchronized void novabala(){
+        if (contador < 5) {
+            if (dispars[contador] == null) {
+                dispars[contador] = new Disparar(nauPropia.getX() + 45, nauPropia.getY() - -20, nauPropia.velocitat());
+            }
+        }
         
+        contador++;
     }
 
     @Override
@@ -195,8 +204,8 @@ class Nau extends Thread {
         g2d.drawImage(this.image2, x, y, null);
         }
     
-    class Disparar extends Thread {
-    ThreadGroup Dispars = new ThreadGroup("");
+    public class Disparar extends Thread {
+    ThreadGroup dispars = new ThreadGroup("");
     private int x,y;
     private int v;
     private int i = 0;
@@ -210,9 +219,15 @@ class Nau extends Thread {
             
             image = new ImageIcon(Nau.class.getResource("dispars.png")).getImage();
             
-            Thread t = new Thread(Dispars, this);
-            t.start();
-            
+            Thread t = new Thread(dispars, this);
+            t.start();  
+        }
+        
+        public void run() {
+        while (seguir) {
+            try { Thread.sleep(this.v); } catch (Exception e) {}
+            moure();
+            } 
         }
         
         public void setSeguir(boolean s){
@@ -223,6 +238,22 @@ class Nau extends Thread {
         }
         public int getX(){
             return this.x;
+        }
+        
+        public synchronized void pintaDispar(Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.drawImage(this.image, this.x, this.y, null);
+        }
+        
+        private void moure() {
+        int dsy = 30;
+        y = y - dsy;
+        if (y <= 0) {
+            if (i < 1) {
+                PanelNau.setContador(0);
+                i++;
+            }
+        }
         }
     
     }
