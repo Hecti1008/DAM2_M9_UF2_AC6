@@ -156,7 +156,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     
 }
 
-public class Disparar extends Thread {
+class Disparar extends Thread {
     ThreadGroup dispars = new ThreadGroup("");
     private int x,y;
     private int v;
