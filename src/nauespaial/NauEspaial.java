@@ -56,7 +56,7 @@ public class NauEspaial extends javax.swing.JFrame {
 
 
 class PanelNau extends JPanel implements Runnable, KeyListener{
-    private int numNaus=3;    
+    private int numNaus=10;    
     Nau[] nau;
     Nau nauPropia;
     private static int contador = 0;
@@ -110,7 +110,7 @@ class PanelNau extends JPanel implements Runnable, KeyListener{
     public synchronized void novabala(){
         if (contador < 5) {
             if (dispars[contador] == null) {
-                dispars[contador] = new Disparar(nauPropia.getX() + 45, nauPropia.getY() - -20, nauPropia.velocitat());
+                dispars[contador] = new Disparar(nauPropia.getX() + 19, nauPropia.getY() - +25, nauPropia.velocitat());
             }
         }
         
